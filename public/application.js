@@ -12,7 +12,14 @@ angular.module(ApplicationConfiguration.applicationModuleName)
         .translations('es', {
             TRANSLATE: 'Tracudir'
         });
-        $translateProvider.preferredLanguage('es');
+        $translateProvider.preferredLanguage('en');
+        /*
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/languages',
+            suffix: '.json'
+        });
+        */
+        //$translateProvider.useLocalStorage();
     })
     .config(['$locationProvider',
         function($locationProvider) {

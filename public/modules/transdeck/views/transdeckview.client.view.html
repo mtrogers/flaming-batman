@@ -1,32 +1,113 @@
 <section data-ng-controller="TransdeckController">
-  <div class="row" ng-hide="start">
+  <div class="row" ng-show="user1.init">
     <div class="jumbotron text-center">
       <h2>Translate.</h2>
-      <button type="button" class="btn btn-primary" ng-click="start = true">Click to begin</button>
+      <p>Select a language to begin</p>
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default" ng-click="setLocale('en')">English (US)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('es')">Español</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('fr')">Français (France)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('ch')">中文(简体)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('ar')">      العربية</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('pt')">Português (Brasil)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('it')">Italiano</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('kr')">한국어</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('de')">Deutsch</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('hi')">हिन्दी</button>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            ...
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Dropdown link</a></li>
+            <li><a href="#">Dropdown link</a></li>
+          </ul>
+        </div>
+      </div>
+      <br>
+
+      <br>
+      <button type="button" class="btn btn-primary" ng-click="user1.init = false; user1.focus = false; user2.focus = true; user2.init = true">{{ 'START' | translate}}</button>
     </div>
   </div>
 
-  <div class="row" ng-show="start">
-    <div class="col-md-6">
-      <div class="jumbotron">
-        <div class="form-group">
-          <label for="left">Enter text to be translated:</label>
-          <textarea class="form-control" rows="2" id="left" data-ng-model="userInput.leftText"></textarea>
+  <div class="row" ng-show="user2.init">
+    <div class="jumbotron text-center">
+      <h2>Hello, I would like to ask you a question.</h2>
+      <p>Press continue if this is the correct language</p>
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default" ng-click="setLocale('en')">English (US)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('es')">Español</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('fr')">Français (France)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('ch')">中文(简体)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('ar')">      العربية</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('pt')">Português (Brasil)</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('it')">Italiano</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('kr')">한국어</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('de')">Deutsch</button>
+        <button type="button" class="btn btn-default" ng-click="setLocale('hi')">हिन्दी</button>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            ...
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Dropdown link</a></li>
+            <li><a href="#">Dropdown link</a></li>
+          </ul>
         </div>
-      <button type="button" class="btn btn-primary" ng-click="translateText()">{{ 'TRANSLATE' | translate }}</button>
+      </div>
+      <br>
+
+      <br>
+      <button type="button" class="btn btn-primary" ng-click="user2.init = false; user2.focus = false; user1.focus = true">{{ 'START' | translate}}</button>
+    </div>
+  </div>
+
+  <div class="row" ng-show="hasInput" ng-repeat-start="message in messages">
+    <div class="panel panel-info {{message.side}}">
+      <div class="panel-heading">
+        <h3 class="panel-title">Panel title</h3>
+      </div>
+      <div class="panel-body">
+        {{message.text}}
       </div>
     </div>
-    <div class="col-md-6">
-        <div class="jumbotron">
-          <div class="form-group">
-            <label for="right">Enter text to be translated:</label>
-            <textarea class="form-control" rows="2" id="right" data-ng-model="userInput.rightText"></textarea>
-          </div>
-          <button type="button" class="btn btn-primary" ng-click="translateText()">Translate</button>
-        </div>
+  </div>
+  <div ng-repeat-end></div>
+
+
+
+    <!--
+    <div class="row" ng-show="user1" >
+    <div class="jumbotron">
+      <div class="form-group">
+        <label for="text1">Enter text to be translated:</label>
+        <textarea class="form-control" rows="2" id="text1" data-ng-model="userInput.text1"></textarea>
+      </div>
+    <button type="button" class="btn btn-primary" ng-click="translateText('user1')">{{ 'TRANSLATE' | translate }}</button>
     </div>
+  </div>
+  -->
+
+  <div class="row" ng-show="user1.focus && !user1.init">
 
 
+      <div class="form-group">
+        <label for="text3">Enter text to be translated:</label>
+        <textarea class="form-control" rows="2" id="text3" data-ng-model="userInput.text1"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" ng-click="testPanel('user1')">{{ 'TRANSLATE' | translate }}</button>
+
+  </div>
+
+  <div class="row" ng-show="user2.focus && !user2.init">
+    <div class="form-group">
+      <label for="text2">Enter text to be translated  :</label>
+      <textarea class="form-control" rows="2" id="text2" data-ng-model="userInput.text2"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="testPanel('user2')">{{ 'TRANSLATE' | translate }}</button>
   </div>
 
 
