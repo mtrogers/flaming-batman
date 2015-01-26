@@ -1,8 +1,8 @@
-<section data-ng-controller="TransdeckController">
-  <div class="row" ng-show="user1.init">
+<section data-ng-controller="TransdeckController" >
+  <div class="row" ng-show="user1.init" style="margin-top: 20px">
     <div class="jumbotron text-center">
-      <h2>Translate.</h2>
-      <p>Select a language to begin</p>
+      <h2>{{ 'TRANSLATE' | translate}}</h2>
+      <p>{{ 'SELECT_LANG' | translate }}</p>
       <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-default" ng-click="setLocale('en')">English (US)</button>
         <button type="button" class="btn btn-default" ng-click="setLocale('es')">Español</button>
@@ -28,14 +28,14 @@
       <br>
 
       <br>
-      <button type="button" class="btn btn-primary" ng-click="user1.init = false; user1.focus = false; user2.focus = true; user2.init = true">{{ 'START' | translate}}</button>
+      <button type="button" class="btn btn-primary" ng-click="user1.init = false; user1.focus = false; user2.focus = true; user2.init = true">{{ 'TRANSLATE' | translate}}</button>
     </div>
   </div>
 
-  <div class="row" ng-show="user2.init">
+  <div class="row" ng-show="user2.init" style="margin-top: 20px">
     <div class="jumbotron text-center">
-      <h2>Hello, I would like to ask you a question.</h2>
-      <p>Press continue if this is the correct language</p>
+      <h2>{{ 'HELLO' | translate}}</h2>
+      <p>{{ 'CONTINUE' | translate}}</p>
       <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-default" ng-click="setLocale('en')">English (US)</button>
         <button type="button" class="btn btn-default" ng-click="setLocale('es')">Español</button>
@@ -61,14 +61,14 @@
       <br>
 
       <br>
-      <button type="button" class="btn btn-primary" ng-click="user2.init = false; user2.focus = false; user1.focus = true">{{ 'START' | translate}}</button>
+      <button type="button" class="btn btn-primary" ng-click="user2.init = false; user2.focus = false; user1.focus = true; changeLocal(user1.locale)">{{ 'TRANSLATE' | translate}}</button>
     </div>
   </div>
-
+ <div class="row" ng-show="hasInput" style="margin-top: 20px"></div>
   <div class="row" ng-show="hasInput" ng-repeat-start="message in messages">
     <div class="panel panel-info {{message.side}}">
       <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
+        <h3 class="panel-title">{{message.transText}}</h3>
       </div>
       <div class="panel-body">
         {{message.text}}
@@ -91,24 +91,28 @@
   </div>
   -->
 
-  <div class="row" ng-show="user1.focus && !user1.init">
+  <div class="row" ng-show="user1.focus && !user1.init" style="margin-top: 20px">
 
 
       <div class="form-group">
-        <label for="text3">Enter text to be translated:</label>
+        <label for="text3">{{'ENTER' | translate}}</label>
         <textarea class="form-control" rows="2" id="text3" data-ng-model="userInput.text1"></textarea>
       </div>
-      <button type="button" class="btn btn-primary" ng-click="testPanel('user1')">{{ 'TRANSLATE' | translate }}</button>
+      <button type="button" class="btn btn-primary" ng-click="translateText()">{{ 'TRANSLATE' | translate }}</button>
 
   </div>
 
-  <div class="row" ng-show="user2.focus && !user2.init">
+  <div class="row" ng-show="user2.focus && !user2.init" style="margin-top: 20px">
     <div class="form-group">
-      <label for="text2">Enter text to be translated  :</label>
+      <label for="text2">{{'ENTER' | translate}}</label>
       <textarea class="form-control" rows="2" id="text2" data-ng-model="userInput.text2"></textarea>
     </div>
-    <button type="button" class="btn btn-primary" ng-click="testPanel('user2')">{{ 'TRANSLATE' | translate }}</button>
+    <button type="button" class="btn btn-primary" ng-click="translateText()">{{ 'TRANSLATE' | translate }}</button>
   </div>
 
+  <br><br><br>
+  <div class="row text-center">
+    <small>Qualtrics Survey: <a href="https://ufl.qualtrics.com/SE/?SID=SV_8igrsyzlOVoD6sZ">https://ufl.qualtrics.com/SE/?SID=SV_8igrsyzlOVoD6sZ</a></small>
+  </div>
 
 </section>

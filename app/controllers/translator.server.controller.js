@@ -49,7 +49,7 @@ exports.list = function(req, res) {
 
 exports.translate = function(req, res) {
     //console.log(req.body.leftText);
-    googleTranslate.translate(req.body.text, 'es', function(er, translation) {
+    googleTranslate.translate(req.body.text, req.body.language, function(er, translation) {
         //res.json(translation);
         res.jsonp(translation);
         //console.log('RES: ', res);

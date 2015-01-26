@@ -48,17 +48,47 @@ angular.module('transdeck').controller('TransdeckController', ['$scope', '$http'
             } else {
                 $scope.messages.push({user1: false, trans: false, text: $scope.userInput.text2, side: 'text-right'});
                 //$scope.transText1.push({user1: false, trans: true, text: data.translatedText});
-                $translate.use($scope.user1.locale);
+
             }
             $scope.user1.focus = !$scope.user1.focus;
             $scope.user2.focus = !$scope.user2.focus;
             $scope.hasInput = true;
         };
 
-        $scope.translateText = function(user) {
+        $scope.translateText = function() {
             //console.log($scope.userInput.leftText);
+            console.log('USERS: ', $scope.user1, $scope.user2);
+            if ($scope.user1.focus) {
+                $http.post('/trans', {text: $scope.userInput.text1, language: $scope.user2.locale}).success(
+                    function (data, status) {
+                        console.log('data!', data);
+                        console.log('status!', status);
+
+                        $scope.messages.push({user1: true, text: $scope.userInput.text1, transText: data.translatedText, side: 'text-left'});
+                        //$scope.transText1.push({user1: true, trans: true, text: data.translatedText});
+                        $translate.use($scope.user2.locale);
+
+                    }
+                );
+            } else {
+                $http.post('/trans', {text: $scope.userInput.text2, language: $scope.user1.locale}).success(
+                    function(data, status) {
+                        console.log('data!', data);
+                        console.log('status!', status);
+
+                        //$scope.messages.push({user1: false, trans: false, text: $scope.userInput.text2} );
+                        $scope.messages.push({user1: false, text: $scope.userInput.text2, transText: data.translatedText, side: 'text-right'});
+                        //$scope.transText1.push({user1: false, trans: true, text: data.translatedText});
+                        $translate.use($scope.user1.locale);
 
 
+                    }
+                );
+            }
+            $scope.user1.focus = !$scope.user1.focus;
+            $scope.user2.focus = !$scope.user2.focus;
+            $scope.hasInput = true;
+            /*
             $http.post('/trans', {text: $scope.userInput.text1}).success(
                 function(data, status) {
                     console.log('data!', data);
@@ -74,12 +104,13 @@ angular.module('transdeck').controller('TransdeckController', ['$scope', '$http'
                     }
 
                 });
-
+            */
             //console.log($scope.userInput.leftText);
         };
 
         $scope.setLocale = function(local) {
 
+            //todo: fix this
             $translate.use(local);
             //$translate.refresh();
             if ($scope.user1.focus) {
@@ -88,7 +119,12 @@ angular.module('transdeck').controller('TransdeckController', ['$scope', '$http'
             } else {
                 $scope.user2.locale = local;
             }
+            console.log($scope.user1, $scope.user2);
 
         };
+
+        $scope.changeLocal = function(local) {
+            $translate.use(local);
+        }
 	}
 ]);
