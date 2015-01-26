@@ -1,0 +1,33 @@
+<section data-ng-controller="TransdeckController">
+  <div class="row" ng-hide="start">
+    <div class="jumbotron text-center">
+      <h2>Translate.</h2>
+      <button type="button" class="btn btn-primary" ng-click="start = true">Click to begin</button>
+    </div>
+  </div>
+
+  <div class="row" ng-show="start">
+    <div class="col-md-6">
+      <div class="jumbotron">
+        <div class="form-group">
+          <label for="left">Enter text to be translated:</label>
+          <textarea class="form-control" rows="2" id="left" data-ng-model="userInput.leftText"></textarea>
+        </div>
+      <button type="button" class="btn btn-primary" ng-click="translateText()">Translate</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+        <div class="jumbotron">
+          <div class="form-group">
+            <label for="right">Enter text to be translated:</label>
+            <textarea class="form-control" rows="2" id="right" data-ng-model="userInput.rightText"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" ng-click="translateText()">Translate</button>
+        </div>
+    </div>
+
+
+  </div>
+
+
+</section>
