@@ -125,6 +125,6 @@ angular.module('transdeck').controller('TransdeckController', ['$scope', '$http'
 
         $scope.changeLocal = function(local) {
             $translate.use(local);
-        }
+        };
 	}
 ]);
