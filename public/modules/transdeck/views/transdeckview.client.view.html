@@ -13,7 +13,7 @@
           <label for="left">Enter text to be translated:</label>
           <textarea class="form-control" rows="2" id="left" data-ng-model="userInput.leftText"></textarea>
         </div>
-      <button type="button" class="btn btn-primary" ng-click="translateText()">Translate</button>
+      <button type="button" class="btn btn-primary" ng-click="translateText()">{{ 'TRANSLATE' | translate }}</button>
       </div>
     </div>
     <div class="col-md-6">
